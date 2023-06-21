@@ -1,0 +1,63 @@
+<button class="btn-promo"><span class="btn-text">Click to copy the coupon</span><span class="promo">"OHMYDUBAI"</span></button>
+
+<style>
+  .btn-promo {
+    max-width: 195px;
+    width: 100%;
+    height: 65px;
+    color: #fff;
+    font-size: 13px;
+    font-family: 'Arial', Arial, sans-serif;
+    line-height: 1.55;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-color: #eb8817;
+    border: 1px solid transparent;
+    border-radius: 50px;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .btn-promo:hover {
+    background-color: #c5aeae4f;
+  }
+
+  .btn-promo--success {
+    background-color: #eb881788;
+  }
+
+  .promo {
+    display: block;
+  }
+</style>
+
+<script>
+  const btnPromo = document.querySelectorAll('.btn-promo');
+
+  const defaultText = (el, defaultText, promoBlock) => {
+    el.textContent = defaultText;
+    el.classList.remove('btn-promo--success');
+    el.appendChild(promoBlock);
+  };
+
+  btnPromo.forEach(el => {
+    let timeoutText;
+    let promoBlock = el.querySelector('.promo');
+    let promoText = el.querySelector('.promo').textContent.replace(/['"]+/g, '');
+    let textBtn = el.querySelector('.btn-text').textContent;
+
+    el.addEventListener('click', (event) => {
+      event.preventDefault();
+        if (!promoText && !textBtn) {
+          promoText = el.querySelector('.promo').textContent;
+          textBtn = el.querySelector('.btn-text').textContent;
+          promo.classList.add('.promo');
+        };
+        el.textContent = 'The coupon has been copied';
+        clearTimeout(timeoutText);
+        timeoutText = setTimeout(defaultText, 2000, el, textBtn, promoBlock);
+        el.classList.add('btn-promo--success');
+        navigator.clipboard.writeText(promoText);
+    });
+  });
+</script>
